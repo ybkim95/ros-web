@@ -19,15 +19,15 @@
     });
 
     ros.on('connection', function() {
-    document.getElementById("status").innerHTML = "Connected";
+      document.getElementById("status").innerHTML = "<span style='color:green;'> CONNECTED </span>";
     });
 
     ros.on('error', function(error) {
-    document.getElementById("status").innerHTML = "Error";
+      document.getElementById("status").innerHTML = "<span style='color:red;'> ERROR </span>";
     });
 
     ros.on('close', function() {
-    document.getElementById("status").innerHTML = "Closed";
+    document.getElementById("status").innerHTML = "CLOSED";
     });
 
     // Create the main viewer.
