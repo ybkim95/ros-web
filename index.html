@@ -18,11 +18,23 @@
       url : 'ws://localhost:9090'
     });
 
+    ros.on('connection', function() {
+    document.getElementById("status").innerHTML = "Connected";
+    });
+
+    ros.on('error', function(error) {
+    document.getElementById("status").innerHTML = "Error";
+    });
+
+    ros.on('close', function() {
+    document.getElementById("status").innerHTML = "Closed";
+    });
+
     // Create the main viewer.
     var viewer = new ROS2D.Viewer({
       divID : 'map',
-      width : 924,                      // 308
-      height : 750                      // 250
+      width : 616,                      // 308
+      height : 500                      // 250
     });
 
     // Setup the map client.
@@ -48,9 +60,14 @@
   </p>
   <ol>
     <li><tt>roscore</tt></li>
-    <li><tt>(method of choice to publish to /map)</tt></li>
+    <li><tt>roslaunch vrep_holonomic_bringup bringup.launch</tt></li>
+    <li><tt>roslaunch vrep_holonomic_slam cartographer_slam.launch</tt></li>
+    <li><tt>roslaunch vrep_holonomic_teleop teleop_key.launch</tt></li> 
     <li><tt>roslaunch rosbridge_server rosbridge_websocket.launch</tt></li>
   </ol>
+
+  <p>Connection status: <span id="status"></span></p>
+
   <div id="map"></div>
 </body>
 </html>
